@@ -7,9 +7,28 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    printf("Hello, World!\n");
+void generateDistribution(unsigned ValueRange, unsigned ThrowNum)
+{
+    int distributionTab[ValueRange];
+    for(unsigned i=0; i<ValueRange; ++i)
+    {
+        *(distributionTab+i) = 0;
+    }
+    for(unsigned i=0; i<ThrowNum; ++i)
+    {
+        (*(distributionTab+rand()%ValueRange))++;
+    }
+}
+
+void showDistributionLine();
+
+void showDistribution();
+
+int main()
+{
+    srand((unsigned)time(NULL));
     return 0;
 }
