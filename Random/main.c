@@ -12,7 +12,7 @@
 
 void showDistributionLine(unsigned PercentValue)
 {
-    printf("%d       ", PercentValue);
+    printf("%2d       ", PercentValue);
     for(size_t i=0; i<PercentValue; ++i)
     {
         printf("=");
@@ -54,11 +54,16 @@ void generateDistribution(unsigned UpperBound, unsigned ThrowNum)
 
 
 
-
-
 int main()
 {
     srand((unsigned)time(NULL));
-    generateDistribution(10, 1000);
+    printf("Ce programme affiche la distribution aléatoire de nombres contenus dans un intervalle, donné, sur un certain nombre de lancers\n");
+    printf("nbre d'elements    [0..100] : ");
+    unsigned UpperBound;
+    scanf("%u", &UpperBound);
+    unsigned ThrowNum;
+    printf("nbre de lancers [0..100000] : ");
+    scanf("%u", &ThrowNum);
+    generateDistribution(UpperBound, ThrowNum);
     return 0;
 }
