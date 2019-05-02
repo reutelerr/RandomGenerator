@@ -9,6 +9,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
+
+#define VIDER_BUFFER    while( getchar() != '\n')
+
+unsigned askVal_inBounds(unsigned maxVal, char* message)
+{
+    bool ok;
+    unsigned val;
+    do{
+        printf("%s [0..%u] : ", message, maxVal);
+        ok = scanf("%u", &val);
+        VIDER_BUFFER;
+    }while((!ok || val > maxVal) && printf("Entree invalide\n"));
+    return val;
+}
 
 void showDistributionLine(unsigned PercentValue)
 {
@@ -23,7 +38,7 @@ void showDistribution(double* distributionTab, unsigned UpperBound)
 {
     for(size_t i=0; i<UpperBound; ++i)
     {
-        printf("tableau [%zu]     ", i);
+        printf("tableau [%2zu]     ", i);
         showDistributionLine(*(distributionTab+i));
         printf("\n");
     }
@@ -58,12 +73,15 @@ int main()
 {
     srand((unsigned)time(NULL));
     printf("Ce programme affiche la distribution aléatoire de nombres contenus dans un intervalle, donné, sur un certain nombre de lancers\n");
-    printf("nbre d'elements    [0..100] : ");
-    unsigned UpperBound;
-    scanf("%u", &UpperBound);
-    unsigned ThrowNum;
-    printf("nbre de lancers [0..100000] : ");
-    scanf("%u", &ThrowNum);
-    generateDistribution(UpperBound, ThrowNum);
+    const unsigned MaxUpperBound = 100;
+    const unsigned MaxThrows = 10000;
+    char recommencer = '\0';
+    do{
+        unsigned UpperBound;
+        UpperBound = askVal_inBounds(MaxUpperBound, "nbre d'elements");
+        unsigned ThrowNum;
+        ThrowNum = askVal_inBounds(MaxThrows, "nbre de lancers");
+        generateDistribution(UpperBound, ThrowNum);
+    }while(recommencer != 'o');
     return 0;
 }
