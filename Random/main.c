@@ -73,8 +73,8 @@ int main()
 {
     srand((unsigned)time(NULL));
     printf("Ce programme affiche la distribution aléatoire de nombres contenus dans un intervalle, donné, sur un certain nombre de lancers\n");
-    const unsigned MaxUpperBound = 100;
-    const unsigned MaxThrows = 10000;
+    const unsigned MAXUPPERBOUND = 100;
+    const unsigned MAXTHROWS = 10000;
     char recommencer = '\0';
     do{
         unsigned UpperBound;
