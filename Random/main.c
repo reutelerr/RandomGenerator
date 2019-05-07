@@ -78,10 +78,18 @@ int main()
     char recommencer = '\0';
     do{
         unsigned UpperBound;
-        UpperBound = askVal_inBounds(MaxUpperBound, "nbre d'elements");
+        UpperBound = askVal_inBounds(MAXUPPERBOUND, "nbre d'elements");
         unsigned ThrowNum;
-        ThrowNum = askVal_inBounds(MaxThrows, "nbre de lancers");
+        ThrowNum = askVal_inBounds(MAXTHROWS, "nbre de lancers");
+        printf("\n");
         generateDistribution(UpperBound, ThrowNum);
-    }while(recommencer != 'o');
+        printf("\n");
+        do
+        {
+            printf("Voulez-vous recommencer ? [o|n] :");
+            scanf("%c", &recommencer);
+            VIDER_BUFFER;
+        }while(recommencer != 'o' && recommencer != 'n');
+    }while(recommencer == 'o');
     return 0;
 }
